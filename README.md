@@ -43,11 +43,14 @@ sudo docker run -d -v /home/srv/public_html/ergomed/:/var/www/html -p 3000:80  -
 Lista działajacych dokerów:
 docker ps
 
-Pobieranie adresu IP DOCKERA
+Pobieranie adresu IP DOCKERA:
 docker inspect <container ID>
 
-Zmiana hasła dla mysql w dockerze 
+Zmiana hasła dla mysql w dockerze:
 docker exec -it idkontenera mysql -uroot -p
+
+a później w konsoli
+
 SET PASSWORD FOR 'root' = PASSWORD('lukasz');
 
 Wykonywanie poleceń konsolowych w konkretnym dokerze
