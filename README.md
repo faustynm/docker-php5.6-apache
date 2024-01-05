@@ -35,23 +35,31 @@ Pod adresem localhost:8000 będzie widoczna zawartośc katalogu:
 
 Docker z BD
 
-sudo docker run -d -v /home/srv/public_html/ergomed/:/var/www/html -p 3000:80  --add-host 'DOCKER_HOST:172.17.0.1' docker pull cytopia/mysql-5.5
-
-
-
-
 Lista działajacych dokerów:
 docker ps
 
 Pobieranie adresu IP DOCKERA:
 docker inspect <container ID>
 
+// uruchomienie maszyny na dokerze
+docker pull cytopia/percona-5.5
+docker run -i -e MYSQL_ROOT_PASSWORD=lukasz --add-host 'DOCKER_HOST:172.17.0.8' docker pull cytopia/percona-5.5
+
+// dostęp do dockera przez konsole
+sudo docker exec -it b360b0c07eeb bash
+lub
+sudo docker exec -it IDDOKER /bin/bash
+
 Zmiana hasła dla mysql w dockerze:
 docker exec -it idkontenera mysql -uroot -p
 
-a później w konsoli
+// możliwośc połączenia z zewnątrz w mysql
+ALTER USER root@% IDENTIFIED BY 'lukasz';
+UPDATE mysql.user SET host='%' WHERE user='root';
+
+// wgranie bazy sql
+docker exec -i b360b0c07eeb mysql -u root -plukasz ergomed < ergomed.sql
+
 
 SET PASSWORD FOR 'root' = PASSWORD('lukasz');
 
-Wykonywanie poleceń konsolowych w konkretnym dokerze
-docker exec -it IDDOKER /bin/bash
