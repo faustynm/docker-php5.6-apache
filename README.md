@@ -70,18 +70,26 @@ docker exec -i b360b0c07eeb mysql -u root -plukasz ergomed < ergomed.sql
 
 ------------
 docker pull alcalbg/php5.6-apache
+
 docker run -d -v /home/srv/public_html/ergomed/:/var/www/html -p 8000:80 alcalbg/php5.6-apache
 
 
 docker pull cytopia/percona-5.5
+
 docker run -i -e MYSQL_ROOT_PASSWORD=lukasz -t cytopia/percona-5.5
+
 docker exec -it d4bf6fc60f31 mysql -uroot -p
+
 create database ergomed;
+
 SET PASSWORD FOR 'root' = PASSWORD('lukasz');
+
 UPDATE mysql.user SET host='%' WHERE user='root';
+
 docker exec -i d4bf6fc60f31 mysql -u root -plukasz ergomed < ergomed.sql
 
 docker exec -it d4bf6fc60f31 mysql -uroot -p
+
 UPDATE `operatorzy` SET `haslo` = md5('lukasz'), `ostatnia_zmiana_hasla` = '2024-01-15' WHERE `nazwa_uz` = 'admin' AND `nazwa_uz` = 'admin';
 
 
