@@ -90,8 +90,9 @@ docker exec -i d4bf6fc60f31 mysql -u root -plukasz ergomed < ergomed.sql
 
 docker exec -it d4bf6fc60f31 mysql -uroot -p
 
-UPDATE `operatorzy` SET `haslo` = md5('lukasz'), `ostatnia_zmiana_hasla` = '2024-01-15' WHERE `nazwa_uz` = 'admin' AND `nazwa_uz` = 'admin';
+use ergomed;
 
+UPDATE `operatorzy` SET `haslo` = md5('lukasz'), `ostatnia_zmiana_hasla` = '2024-01-15' WHERE `nazwa_uz` = 'admin' AND `nazwa_uz` = 'admin';
 
 SET PASSWORD FOR 'root' = PASSWORD('lukasz');
 
